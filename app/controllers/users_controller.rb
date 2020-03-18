@@ -10,9 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # notice: '登録が完了しました。'
+      flash[:success] = "登録が完了しました！"
+      redirect_to @user
     else
-      render 'new', notice: '登録内容に誤りがあります。'
+      flash[:danger] = "入力情報に誤りがあります。"
+      render 'new'
     end
   end
 
